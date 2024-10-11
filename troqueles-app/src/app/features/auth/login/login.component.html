@@ -1,0 +1,37 @@
+<div class="conteiner">
+  <mat-card class="custom-card">
+    <mat-card-header style="color: white">Iniciar secion</mat-card-header>
+
+    <mat-card-content>
+      <form>
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput />
+          <mat-hint style="color: white"
+            >Debe ingresar un E-mail valido</mat-hint
+          >
+          <mat-icon matSuffix>mail</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="w-full mt-2" appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <input matInput />
+          <mat-hint style="color: white"
+            >Debe ingresar contraseña</mat-hint
+          >
+          <mat-icon matSuffix>key</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="w-full mt-2" appearance="outline">
+          <mat-label>Rol</mat-label>
+          <mat-select>
+            <mat-option value="ADMIN">ADMIN</mat-option>
+            <mat-option value="USER">USER</mat-option>
+
+          </mat-select>
+          <mat-hint style="color: white;">Selecione el Rol</mat-hint>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
