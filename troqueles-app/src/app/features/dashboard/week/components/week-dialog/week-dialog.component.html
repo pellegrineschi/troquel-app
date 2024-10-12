@@ -1,4 +1,5 @@
-<h2 mat-dialog-title>Crear Semana</h2>
+<h2 mat-dialog-title>
+   {{ editWeek ? "Editando " + editWeek.name : "Crear Curso" }} </h2>
 
 <mat-dialog-content>
   <form [formGroup]="weekForm">

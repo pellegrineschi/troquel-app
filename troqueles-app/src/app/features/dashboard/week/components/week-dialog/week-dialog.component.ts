@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Week } from '../../model/index.model';
 
 @Component({
   selector: 'app-week-dialog',
@@ -11,12 +12,18 @@ export class WeekDialogComponent {
 
   weekForm : FormGroup;
 
-  constructor(private fb : FormBuilder, private matDialogRef : MatDialogRef<WeekDialogComponent>) {
+  constructor(private fb : FormBuilder, private matDialogRef : MatDialogRef<WeekDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public editWeek? : Week
+  )
+   {
     this.weekForm = this.fb.group({
       name: [null, Validators.required],
-      starDate: [],
+      startDate: [],
       endDate: []
     })
+    if(this.editWeek){
+      this.weekForm.patchValue(this.editWeek);
+    }
    }
 
    onSubmit(): void {

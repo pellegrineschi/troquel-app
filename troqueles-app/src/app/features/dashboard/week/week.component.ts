@@ -1,26 +1,12 @@
 import { Component } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { WeekDialogComponent } from './components/week-dialog/week-dialog.component';
+import { Week } from './model/index.model';
+import { generatedId } from '../../../shared/utils';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
+
+
 
 @Component({
   selector: 'app-week',
@@ -32,9 +18,27 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 export class WeekComponent {
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
-
+  displayedColumns: string[] = ['id', 'name', 'startDate', 'endDate', 'actions'];
+  dataSource: Week[] = [
+    {
+      id: '1',
+      name: 'noviembre 1',
+      startDate: new Date,
+      endDate: new Date
+    },
+    {
+      id: '2',
+      name: 'noviembre 2',
+      startDate: new Date,
+      endDate: new Date
+    },
+    {
+      id: '3',
+      name: 'noviembre 3',
+      startDate: new Date,
+      endDate: new Date
+    }
+  ];
   nameWeek = "";
 
   constructor(private matdialog: MatDialog){}
@@ -46,7 +50,32 @@ export class WeekComponent {
         console.log("valor", value);
         this.nameWeek = value.name
 
+        value["id"] = generatedId(4)
+
+        this.dataSource = [...this.dataSource, value]
+
       }
     })
+  }
+
+  deleteWeekById(id:string):void{
+    if(confirm("esta seguro?")){
+
+      this.dataSource = this.dataSource.filter(week => week.id!== id)
+    }
+  }
+
+  editWeek(EditWeek: Week):void{
+    this.matdialog.open(WeekDialogComponent, {data:EditWeek}).afterClosed().subscribe(
+      {
+        next:(value)=>{
+
+          if(!!value){
+            this.dataSource = this.dataSource.map((el) =>
+            el.id === EditWeek.id ? {...value, id: EditWeek.id} : el )
+          }
+        }
+      }
+    )
   }
 }
