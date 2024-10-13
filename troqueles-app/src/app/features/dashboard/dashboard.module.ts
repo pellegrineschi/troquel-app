@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { WeekModule } from './week/week.module';
 import { MatListModule } from '@angular/material/list';
+import { TroquelModule } from './troquel/troquel.module';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { MatListModule } from '@angular/material/list';
     MatButtonModule,
     MatCardModule,
     WeekModule,
-    MatListModule
+    MatListModule,
+    TroquelModule
   ],
   exports:[DashboardComponent]
 })

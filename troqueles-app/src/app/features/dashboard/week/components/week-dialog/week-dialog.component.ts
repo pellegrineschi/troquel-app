@@ -19,7 +19,8 @@ export class WeekDialogComponent {
     this.weekForm = this.fb.group({
       name: [null, Validators.required],
       startDate: [],
-      endDate: []
+      endDate: [],
+      number: [null, Validators.required]
     })
     if(this.editWeek){
       this.weekForm.patchValue(this.editWeek);
@@ -27,9 +28,13 @@ export class WeekDialogComponent {
    }
 
    onSubmit(): void {
-    console.log(this.weekForm.value);
 
-    this.matDialogRef.close(this.weekForm.value)
+    if(this.weekForm.valid){
+
+      this.matDialogRef.close(this.weekForm.value)
+    }else{
+      alert('El formulario debe ser completado')
+    }
 
    }
 }

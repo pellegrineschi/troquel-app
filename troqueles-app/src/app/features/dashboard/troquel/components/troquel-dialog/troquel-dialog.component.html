@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>
+  {{ editTroquel ? "Editando " + editTroquel.obleaOld : "Cargar troquel" }} </h2>
+
+<mat-dialog-content>
+ <form [formGroup]="troquelForm">
+   <mat-form-field class="w-full">
+     <mat-label>Dominio</mat-label>
+     <input formControlName = "dominio" matInput />
+     <mat-error>El campo es requerido</mat-error>
+   </mat-form-field>
+
+   <mat-form-field class="w-full">
+     <mat-label>Formulario Anterior</mat-label>
+     <input formControlName = "numberFormOld" matInput />
+     <mat-error>El campo es requerido</mat-error>
+   </mat-form-field>
+
+   <!-- datepiker rango -->
+   <!-- <mat-form-field class="w-full">
+     <mat-label>Fecha de inicio - fin</mat-label>
+     <mat-date-range-input [rangePicker]="picker">
+       <input matStartDate formControlName="startDate" placeholder="fecha de inicio">
+       <input matEndDate formControlName="endDate" placeholder="fecha fin">
+     </mat-date-range-input>
+     <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+     <mat-date-range-picker #picker></mat-date-range-picker> -->
+
+     <!-- @if (range.controls.start.hasError('matStartDateInvalid')) {
+       <mat-error>Invalid start date</mat-error>
+     }
+     @if (range.controls.end.hasError('matEndDateInvalid')) {
+       <mat-error>Invalid end date</mat-error>
+     } -->
+   <!-- </mat-form-field> -->
+ </form>
+</mat-dialog-content>
+
+<mat-dialog-content>
+ <button mat-dialog-close mat-button>Cancelar</button>
+ <button (click)="onSubmit()" mat-button >Guardar</button>
+</mat-dialog-content>
+

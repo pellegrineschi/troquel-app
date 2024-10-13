@@ -3,4 +3,5 @@ export interface Week {
   name: string;
   startDate: Date;
   endDate: Date;
+  number: number;
 }

@@ -18,25 +18,28 @@ import { generatedId } from '../../../shared/utils';
 
 export class WeekComponent {
 
-  displayedColumns: string[] = ['id', 'name', 'startDate', 'endDate', 'actions'];
+  displayedColumns: string[] = ['id', 'name', 'startDate', 'endDate','number', 'actions'];
   dataSource: Week[] = [
     {
       id: '1',
       name: 'noviembre 1',
       startDate: new Date,
-      endDate: new Date
+      endDate: new Date,
+      number: 1
     },
     {
       id: '2',
       name: 'noviembre 2',
       startDate: new Date,
-      endDate: new Date
+      endDate: new Date,
+      number: 2
     },
     {
       id: '3',
       name: 'noviembre 3',
       startDate: new Date,
-      endDate: new Date
+      endDate: new Date,
+      number: 3
     }
   ];
   nameWeek = "";
