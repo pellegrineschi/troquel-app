@@ -12,7 +12,15 @@ import { TroquelDialogComponent } from './components/troquel-dialog/troquel-dial
 })
 export class TroquelComponent {
 
-  displayedColumns: string[] = ['id', 'obleaOld', 'startDate', 'endDate','number', 'actions'];
+  displayedColumns: string[] =
+   ['id',
+    'dominio',
+    'numberFormOld',
+    'numberFormNew',
+    'obleaOld',
+    'obleaNew',
+    'date',
+    'reson'];
   dataSource: Troquel[] = [
     {
       id: '1',
@@ -21,7 +29,7 @@ export class TroquelComponent {
       numberFormNew: 321,
       obleaOld: '987',
       obleaNew: '654',
-      Date: new Date(),
+      date: new Date(),
       reson: 'oblea unica',
     },
     {
@@ -31,7 +39,7 @@ export class TroquelComponent {
       numberFormNew: 921,
       obleaOld: '927',
       obleaNew: '654',
-      Date: new Date(),
+      date: new Date(),
       reson: 'oblea unica',
     },
     {
@@ -41,7 +49,7 @@ export class TroquelComponent {
       numberFormNew: 385,
       obleaOld: '127',
       obleaNew: '684',
-      Date: new Date(),
+      date: new Date(),
       reson: 'oblea unica',
     },
 
@@ -52,7 +60,7 @@ export class TroquelComponent {
   constructor(private matdialog: MatDialog){}
 
   openDialog():void{
-    this.matdialog.open(TroquelComponent).afterClosed()
+    this.matdialog.open(TroquelDialogComponent).afterClosed()
     .subscribe({
       next:(value)=>{
         console.log("valor", value);

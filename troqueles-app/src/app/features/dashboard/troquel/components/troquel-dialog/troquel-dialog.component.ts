@@ -18,8 +18,9 @@ export class TroquelDialogComponent {
   )
    {
     this.troquelForm = this.fb.group({
-      dominio: [null, Validators.required],
-      Date: [],
+      id: [],
+      dominio: [],
+      date: [],
       numberFormOld: [],
       numberFormNew: [],
       obleaOld:[],
