@@ -5,7 +5,7 @@ export interface Troquel {
   numberFormNew: number;
   obleaOld: string;
   obleaNew: string;
-  date: Date;
+  // date: Date;
   reson: string;
 
 }
