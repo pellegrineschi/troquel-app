@@ -19,8 +19,9 @@ export class TroquelComponent {
     'numberFormNew',
     'obleaOld',
     'obleaNew',
-    // 'date',
-    'reson'];
+    'date',
+    'reson',
+    'actions'];
   dataSource: Troquel[] = [
     {
       id: '1',
@@ -29,7 +30,7 @@ export class TroquelComponent {
       numberFormNew: 321,
       obleaOld: '987',
       obleaNew: '654',
-      // date: new Date(),
+      date: new Date(),
       reson: 'oblea unica',
     },
     {
@@ -39,7 +40,7 @@ export class TroquelComponent {
       numberFormNew: 921,
       obleaOld: '927',
       obleaNew: '654',
-      // date: new Date(),
+      date: new Date(),
       reson: 'oblea unica',
     },
     {
@@ -49,7 +50,7 @@ export class TroquelComponent {
       numberFormNew: 385,
       obleaOld: '127',
       obleaNew: '684',
-      // date: new Date(),
+      date: new Date(),
       reson: 'oblea unica',
     },
 
@@ -74,25 +75,25 @@ export class TroquelComponent {
     })
   }
 
-  // deleteWeekById(id:string):void{
-  //   if(confirm("esta seguro?")){
+  deleteTroquelById(id:string):void{
+    if(confirm("esta seguro?")){
 
-  //     this.dataSource = this.dataSource.filter(troquel => troquel.id == id )
-  //   }
-  // }
+      this.dataSource = this.dataSource.filter(troquel => troquel.id !== id)
+    }
+  }
 
-  // editWeek(EditTroquel: Troquel):void{
-  //   this.matdialog.open(TroquelDialogComponent, {data:EditTroquel}).afterClosed().subscribe(
-  //     {
-  //       next:(value)=>{
+  editTroquel(EditTroquel: Troquel):void{
+    this.matdialog.open(TroquelDialogComponent, {data:EditTroquel}).afterClosed().subscribe(
+      {
+        next:(value)=>{
 
-  //         if(!!value){
-  //           this.dataSource = this.dataSource.map((el) =>
-  //           el.id === EditTroquel.id ? {...value, id: EditTroquel.id} : el )
-  //         }
-  //       }
-  //     }
-  //   )
-  // }
+          if(!!value){
+            this.dataSource = this.dataSource.map((el) =>
+            el.id === EditTroquel.id ? {...value, id: EditTroquel.id} : el )
+          }
+        }
+      }
+    )
+  }
 
 }

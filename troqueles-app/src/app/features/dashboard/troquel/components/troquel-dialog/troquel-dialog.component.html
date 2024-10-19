@@ -3,6 +3,17 @@
 
 <mat-dialog-content>
  <form [formGroup]="troquelForm">
+
+  <mat-form-field class="w-full">
+    <mat-label>Selecione Fecha</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName = "date">
+    <mat-error>El campo es requerido</mat-error>
+    <mat-hint>DD/MM/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+
    <mat-form-field class="w-full">
      <mat-label>Dominio</mat-label>
      <input formControlName = "dominio" matInput />
@@ -15,24 +26,32 @@
      <mat-error>El campo es requerido</mat-error>
    </mat-form-field>
 
-   <!-- datepiker rango -->
-   <!-- <mat-form-field class="w-full">
-     <mat-label>Fecha de inicio - fin</mat-label>
-     <mat-date-range-input [rangePicker]="picker">
-       <input matStartDate formControlName="startDate" placeholder="fecha de inicio">
-       <input matEndDate formControlName="endDate" placeholder="fecha fin">
-     </mat-date-range-input>
-     <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-     <mat-date-range-picker #picker></mat-date-range-picker> -->
+   <mat-form-field class="w-full">
+     <mat-label>Formulario Nuevo</mat-label>
+     <input formControlName = "numberFormNew" matInput />
+     <mat-error>El campo es requerido</mat-error>
+   </mat-form-field>
 
-     <!-- @if (range.controls.start.hasError('matStartDateInvalid')) {
-       <mat-error>Invalid start date</mat-error>
-     }
-     @if (range.controls.end.hasError('matEndDateInvalid')) {
-       <mat-error>Invalid end date</mat-error>
-     } -->
-   <!-- </mat-form-field> -->
+   <mat-form-field class="w-full">
+     <mat-label>Oblea Anterior</mat-label>
+     <input formControlName = "obleaOld" matInput />
+     <mat-error>El campo es requerido</mat-error>
+   </mat-form-field>
+
+   <mat-form-field class="w-full">
+     <mat-label>Oblea Nueva</mat-label>
+     <input formControlName = "obleaNew" matInput />
+     <mat-error>El campo es requerido</mat-error>
+   </mat-form-field>
+
+   <mat-form-field class="w-full">
+     <mat-label>Motivo</mat-label>
+     <input formControlName = "reson" matInput />
+     <mat-error>El campo es requerido</mat-error>
+   </mat-form-field>
+
+
+
  </form>
 </mat-dialog-content>
 

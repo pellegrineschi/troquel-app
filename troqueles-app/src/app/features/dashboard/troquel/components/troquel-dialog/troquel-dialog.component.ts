@@ -19,13 +19,13 @@ export class TroquelDialogComponent {
    {
     this.troquelForm = this.fb.group({
       id: [],
-      dominio: [],
-      date: [],
-      numberFormOld: [],
-      numberFormNew: [],
-      obleaOld:[],
-      obleaNew:[],
-      rason:[]
+      dominio: [null,Validators.required],
+      date: [null,Validators.required],
+      numberFormOld: [null,Validators.required],
+      numberFormNew: [null, Validators.required],
+      obleaOld:[null, Validators.required],
+      obleaNew:[null, Validators.required],
+      reson:[null, Validators.required]
     })
     if(this.editTroquel){
       this.troquelForm.patchValue(this.editTroquel);
