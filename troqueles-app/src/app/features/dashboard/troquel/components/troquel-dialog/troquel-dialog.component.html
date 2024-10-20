@@ -2,7 +2,7 @@
   {{ editTroquel ? "Editando " + editTroquel.obleaOld : "Cargar troquel" }} </h2>
 
 <mat-dialog-content>
- <form [formGroup]="troquelForm">
+ <form [formGroup]="troquelForm" (ngSubmit)="onSubmit()" >
 
   <mat-form-field class="w-full">
     <mat-label>Selecione Fecha</mat-label>
@@ -50,13 +50,13 @@
      <mat-error>El campo es requerido</mat-error>
    </mat-form-field>
 
+   <div>
+    <button mat-dialog-close mat-button>Cancelar</button>
+    <button type="submit" (click)="onSubmit()" mat-button >Guardar</button>
+   </div>
 
 
  </form>
 </mat-dialog-content>
 
-<mat-dialog-content>
- <button mat-dialog-close mat-button>Cancelar</button>
- <button (click)="onSubmit()" mat-button >Guardar</button>
-</mat-dialog-content>
 
