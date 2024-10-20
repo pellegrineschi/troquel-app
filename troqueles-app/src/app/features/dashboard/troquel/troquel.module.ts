@@ -12,6 +12,19 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+
+export const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MM YYYY',
+    dateA11yLabel: 'DD/MM/YYYY',
+    monthYearA11yLabel: 'MM YYYY',
+  },
+};
 
 
 @NgModule({
@@ -32,7 +45,13 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule,
     ReactiveFormsModule,
     MatDatepickerModule,
-    MatTableModule
+    MatTableModule,
+    MatNativeDateModule
+  ],
+
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },  // Cambia el idioma a español (puedes modificarlo según sea necesario)
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS } // Utiliza el formato personalizado
   ]
 })
 export class TroquelModule { }
