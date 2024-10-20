@@ -7,40 +7,58 @@ import { Troquel } from '../../model/index.model';
 @Component({
   selector: 'app-troquel-dialog',
   templateUrl: './troquel-dialog.component.html',
-  styleUrl: './troquel-dialog.component.scss'
+  styleUrl: './troquel-dialog.component.scss',
 })
 export class TroquelDialogComponent {
+  troquelForm: FormGroup;
 
-  troquelForm : FormGroup;
-
-  constructor(private fb : FormBuilder, private matDialogRef : MatDialogRef<TroquelDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public editTroquel? : Troquel
-  )
-   {
+  constructor(
+    private fb: FormBuilder,
+    private matDialogRef: MatDialogRef<TroquelDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public editTroquel?: Troquel
+  ) {
     this.troquelForm = this.fb.group({
       id: [],
-      dominio: [null,Validators.required],
-      date: [null,Validators.required],
-      numberFormOld: [null,Validators.required],
+      date: [null, Validators.required],
+      numberFormOld: [null, Validators.required],
       numberFormNew: [null, Validators.required],
-      obleaOld:[null, Validators.required],
-      obleaNew:[null, Validators.required],
-      reson:[null, Validators.required]
-    })
-    if(this.editTroquel){
+      qr: [null, Validators.required],
+      obleaOld: [null, Validators.required],
+      reson: [null, Validators.required],
+    });
+    if (this.editTroquel) {
       this.troquelForm.patchValue(this.editTroquel);
     }
-   }
+  }
 
-   onSubmit(): void {
+  // onSubmit(): void {
+  //   if (this.troquelForm.valid) {
+  //     this.matDialogRef.close(this.troquelForm.value);
+  //   } else {
+  //     alert('El formulario debe ser completado');
+  //   }
+  // }
 
-    if(this.troquelForm.valid){
+  onSubmit(): void {
+    if (this.troquelForm.valid) {
+      const qrValue = this.troquelForm.get('qr')?.value;
 
-      this.matDialogRef.close(this.troquelForm.value)
-    }else{
-      alert('El formulario debe ser completado')
+      if (qrValue) {
+        const [obleaNew, dominio] = qrValue.split('-');
+
+        // Agrega los datos obtenidos a los campos que eliminaste
+        const formData = {
+          ...this.troquelForm.value,
+          numberFormNew: obleaNew.trim(),  // Número de formulario nuevo
+          dominio: dominio.trim()               // Dominio
+        };
+
+        this.matDialogRef.close(formData);
+      } else {
+        alert('El código QR es inválido');
+      }
+    } else {
+      alert('El formulario debe ser completado');
     }
-
-   }
-
+  }
 }
