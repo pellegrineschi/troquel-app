@@ -31,34 +31,33 @@ export class TroquelDialogComponent {
     }
   }
 
-  // onSubmit(): void {
-  //   if (this.troquelForm.valid) {
-  //     this.matDialogRef.close(this.troquelForm.value);
-  //   } else {
-  //     alert('El formulario debe ser completado');
-  //   }
-  // }
+
 
   onSubmit(): void {
     if (this.troquelForm.valid) {
       const qrValue = this.troquelForm.get('qr')?.value;
 
-      if (qrValue) {
-        const [obleaNew, dominio] = qrValue.split('-');
+      if (qrValue && qrValue.includes('-')) {
+        // Validar que el QR contiene un guion y se puede dividir en dos partes
+        const [dominio, obleaNew] = qrValue.split('-');
 
-        // Agrega los datos obtenidos a los campos que eliminaste
-        const formData = {
-          ...this.troquelForm.value,
-          numberFormNew: obleaNew.trim(),  // Número de formulario nuevo
-          dominio: dominio.trim()               // Dominio
-        };
+        if (dominio && obleaNew) {
+          const formData = {
+            ...this.troquelForm.value,
+            dominio: dominio.trim(),
+            obleaNew: obleaNew.trim()
+          };
 
-        this.matDialogRef.close(formData);
+          this.matDialogRef.close(formData);
+        } else {
+          alert('El código QR es inválido: falta dominio u oblea.');
+        }
       } else {
-        alert('El código QR es inválido');
+        alert('El código QR es inválido: debe tener el formato "formularioNuevo-dominio".');
       }
     } else {
       alert('El formulario debe ser completado');
     }
   }
+
 }
