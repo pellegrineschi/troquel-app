@@ -12,17 +12,7 @@ import { TroquelDialogComponent } from './components/troquel-dialog/troquel-dial
 })
 export class TroquelComponent {
 
-  displayedColumns: string[] =
-   ['id',
-    'dominio',
-    'numberFormOld',
-    'numberFormNew',
-    'obleaOld',
-    'obleaNew',
-    'date',
-    'reson',
-    'actions'];
-  dataSource: Troquel[] = [
+  reposiciones: Troquel[] = [
     {
       id: '1',
       dominio: 'fai281',
@@ -53,47 +43,124 @@ export class TroquelComponent {
       date: new Date(),
       reson: 'oblea unica',
     },
-
-
   ];
+  anulaciones: Partial<Troquel>[] = [];
+
+
+  displayedColumns: string[] =
+   ['id',
+    'dominio',
+    'numberFormOld',
+    'numberFormNew',
+    'obleaOld',
+    'obleaNew',
+    'date',
+    'reson',
+    'actions'];
+
+    displayColumnsAnulaciones: string[] = [
+      'id',
+      'date',
+      'numberFormNew',
+       'reson',
+       'dominio',
+       'actions'
+    ]
+    // dataSource: Troquel[] = [];
   nameWeek = "";
 
   constructor(private matdialog: MatDialog){}
 
-  openDialog():void{
+
+
+  openDialog(): void {
     this.matdialog.open(TroquelDialogComponent).afterClosed()
-    .subscribe({
-      next:(value)=>{
-        console.log("valor", value);
-        this.nameWeek = value.name
+      .subscribe({
+        next: (value) => {
+          if (value) {
+            value["id"] = generatedId(4);
 
-        value["id"] = generatedId(4)
-
-        this.dataSource = [...this.dataSource, value]
-
-      }
-    })
+            if (value.tipoOperacion === 'reposicion') {
+              // Agregar el troquel completo a reposiciones
+              this.reposiciones = [...this.reposiciones, value];
+            } else if (value.tipoOperacion === 'anulacion') {
+              // Solo los campos necesarios para anulaciones
+              const anulacionData = {
+                date: value.date,
+                numberFormNew: value.numberFormNew,
+                reson: value.reson,
+                dominio: value.dominio,
+                id: value.id
+              };
+              this.anulaciones = [...this.anulaciones, anulacionData];
+            }
+          }
+        }
+      });
   }
 
-  deleteTroquelById(id:string):void{
-    if(confirm("esta seguro?")){
 
-      this.dataSource = this.dataSource.filter(troquel => troquel.id !== id)
+
+
+  deleteTroquelById(id: string, tipo: 'reposicion' | 'anulacion'): void {
+    if (confirm("¿Está seguro?")) {
+      if (tipo === 'reposicion') {
+        this.reposiciones = this.reposiciones.filter(troquel => troquel.id !== id);
+      } else if (tipo === 'anulacion') {
+        this.anulaciones = this.anulaciones.filter(troquel => troquel.id !== id);
+      }
     }
   }
 
-  editTroquel(EditTroquel: Troquel):void{
-    this.matdialog.open(TroquelDialogComponent, {data:EditTroquel}).afterClosed().subscribe(
-      {
-        next:(value)=>{
 
-          if(!!value){
-            this.dataSource = this.dataSource.map((el) =>
-            el.id === EditTroquel.id ? {...value, id: EditTroquel.id} : el )
+
+
+  // editTroquel(EditTroquel: Troquel, tipo: 'reposicion' | 'anulacion'): void {
+  //   const troquelData = { ...EditTroquel, tipoOperacion: tipo };
+
+  //   this.matdialog.open(TroquelDialogComponent, { data: troquelData }).afterClosed().subscribe({
+  //     next: (value) => {
+  //       if (!!value) {
+  //         if (tipo === 'reposicion') {
+  //           this.reposiciones = this.reposiciones.map((el) =>
+  //             el.id === EditTroquel.id ? { ...value, id: EditTroquel.id, tipoOperacion: 'reposicion' } : el
+  //           );
+  //         } else if (tipo === 'anulacion') {
+  //           this.anulaciones = this.anulaciones.map((el) =>
+  //             el.id === EditTroquel.id ? { ...value, id: EditTroquel.id, tipoOperacion: 'anulacion' } : el
+  //           );
+  //         }
+  //       }
+  //     },
+  //   });
+  // }
+
+  editTroquel(EditTroquel: Troquel, tipo: 'reposicion' | 'anulacion'): void {
+    const troquelData = { ...EditTroquel, tipoOperacion: tipo };  // Agregar tipoOperacion a los datos
+
+    this.matdialog.open(TroquelDialogComponent, { data: troquelData }).afterClosed().subscribe({
+      next: (value) => {
+        if (!!value) {
+          if (tipo === 'reposicion') {
+            // Actualiza la lista de reposiciones
+            this.reposiciones = this.reposiciones.map((el) =>
+              el.id === EditTroquel.id ? { ...value, id: EditTroquel.id, tipoOperacion: 'reposicion' } : el
+            );
+          } else if (tipo === 'anulacion') {
+            // Actualiza la lista de anulaciones
+            this.anulaciones = this.anulaciones.map((el) =>
+              el.id === EditTroquel.id ? {
+                ...value,
+                id: EditTroquel.id,
+                tipoOperacion: 'anulacion'
+              } : el
+            );
           }
         }
-      }
-    )
+      },
+    });
   }
+
+
 
 }

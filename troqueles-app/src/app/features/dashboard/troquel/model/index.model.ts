@@ -7,5 +7,7 @@ export interface Troquel {
   obleaNew: string;
   date: Date;
   reson: string;
+  tipoOperacion?: string;
+  qr?: string;
 
 }

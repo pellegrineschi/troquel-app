@@ -2,7 +2,7 @@
 
 
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table [dataSource]="reposiciones" class="mat-elevation-z8">
 
 
   <ng-container matColumnDef="date">
@@ -49,11 +49,11 @@
     <th mat-header-cell *matHeaderCellDef> Acciones </th>
     <td mat-cell *matCellDef="let element">
 
-      <button (click)="editTroquel(element)" mat-icon-button>
+      <button (click)="editTroquel(element, 'reposicion')" mat-icon-button>
         <mat-icon>edit</mat-icon>
       </button>
 
-      <button (click)="deleteTroquelById(element.id)" mat-icon-button>
+      <button (click)="deleteTroquelById(element.id, 'reposicion')" mat-icon-button>
         <mat-icon>delete</mat-icon>
       </button>
     </td>
@@ -65,5 +65,51 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
+<h2>Tabla de Anulaciones</h2>
+<table mat-table [dataSource]="anulaciones" class="mat-elevation-z8">
+  <!-- Definición de columnas para la tabla de anulaciones -->
 
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef> Fecha </th>
+    <td mat-cell *matCellDef="let element"> {{element.date | date: "dd/MM/yyyy" }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="numberFormNew">
+    <th mat-header-cell *matHeaderCellDef> Formulario Actual </th>
+    <td mat-cell *matCellDef="let element"> {{element.numberFormNew}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="reson">
+    <th mat-header-cell *matHeaderCellDef> Motivo </th>
+    <td mat-cell *matCellDef="let element"> {{element.reson}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="dominio">
+    <th mat-header-cell *matHeaderCellDef> Dominio </th>
+    <td mat-cell *matCellDef="let element"> {{element.dominio}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+    <td mat-cell *matCellDef="let element">
+
+      <button (click)="editTroquel(element, 'anulacion')" mat-icon-button>
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <button (click)="deleteTroquelById(element.id, 'anulacion')" mat-icon-button>
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayColumnsAnulaciones"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayColumnsAnulaciones "></tr>
+</table>
 
