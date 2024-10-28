@@ -1,153 +1,80 @@
 <h2 mat-dialog-title>
-  {{ editTroquel ? "Editando " + editTroquel.obleaOld : "Cargar troquel" }} </h2>
+  {{ editTroquel ? "Editando " + editTroquel.obleaOld : "Cargar troquel" }}
+</h2>
 
 <mat-dialog-content>
- <!-- <form [formGroup]="troquelForm" (ngSubmit)="onSubmit()" >
-
-  <mat-form-field class="w-full">
-    <mat-label>Tipo de operación</mat-label>
-    <mat-select formControlName="tipoOperacion" required (selectionChange)="onTipoOperacionChange($event.value)">
-      <mat-option value="reposicion">Reposición</mat-option>
-      <mat-option value="anulacion">Anulación</mat-option>
-    </mat-select>
-    <mat-error>El campo es requerido</mat-error>
-  </mat-form-field>
-
-  <mat-form-field class="w-full">
-    <mat-label>Dominio</mat-label>
-    <input formControlName="dominio" matInput readonly />
-  </mat-form-field>
-
-
-
-  <mat-form-field class="w-full">
-    <mat-label>Selecione Fecha</mat-label>
-    <input matInput [matDatepicker]="picker" formControlName = "date">
-    <mat-error>El campo es requerido</mat-error>
-    <mat-hint>MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-
-  <mat-form-field class="w-full">
-    <mat-label>Código QR</mat-label>
-    <input formControlName="qr" matInput />
-    <mat-error>El campo es requerido</mat-error>
-  </mat-form-field>
-
-
-   <mat-form-field class="w-full">
-     <mat-label>Formulario Anterior</mat-label>
-     <input formControlName = "numberFormOld" matInput />
-     <mat-error>El campo es requerido</mat-error>
-   </mat-form-field>
-
-
-
-   <mat-form-field class="w-full">
-     <mat-label>Oblea Anterior</mat-label>
-     <input formControlName = "obleaOld" matInput />
-     <mat-error>El campo es requerido</mat-error>
-   </mat-form-field>
-
-   <mat-form-field class="w-full">
-    <mat-label>Formulario Nuevo</mat-label>
-    <input formControlName = "numberFormNew" matInput />
-    <mat-error>El campo es requerido</mat-error>
-  </mat-form-field>
-
-
-   <mat-form-field class="w-full">
-     <mat-label>Motivo</mat-label>
-     <input formControlName = "reson" matInput />
-     <mat-error>El campo es requerido</mat-error>
-   </mat-form-field>
-
-   <div>
-    <button mat-dialog-close mat-button>Cancelar</button>
-    <button type="submit" (click)="onSubmit()" mat-button >Guardar</button>
-   </div>
-
-
- </form> -->
-
- <form [formGroup]="troquelForm" (ngSubmit)="onSubmit()">
-  <mat-form-field class="w-full">
-
-    <mat-label>Tipo de operación</mat-label>
-    <mat-select formControlName="tipoOperacion" required (selectionChange)="onTipoOperacionChange($event.value)">
-      <mat-option value="reposicion">Reposición</mat-option>
-      <mat-option value="anulacion">Anulación</mat-option>
-    </mat-select>
-    <mat-error>El campo es requerido</mat-error>
-  </mat-form-field>
-
-  <mat-form-field class="w-full">
-    <mat-label>Selecione Fecha</mat-label>
-    <input matInput [matDatepicker]="picker" formControlName = "date">
-    <mat-error>El campo es requerido</mat-error>
-    <mat-hint>MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-
-  <mat-form-field class="w-full">
-    <mat-label>Formulario Nuevo</mat-label>
-    <input formControlName = "numberFormNew" matInput />
-    <mat-error>El campo es requerido</mat-error>
-  </mat-form-field>
-
-  <!-- Campos específicos para 'Reposición' -->
-  <div *ngIf="isReposicion">
+  <form [formGroup]="troquelForm" (ngSubmit)="onSubmit()">
     <mat-form-field class="w-full">
-      <mat-label>Formulario Anterior</mat-label>
-      <input formControlName="numberFormOld" matInput />
+      <mat-label>Tipo de operación</mat-label>
+      <mat-select
+        formControlName="tipoOperacion"
+        required
+        (selectionChange)="onTipoOperacionChange($event.value)"
+      >
+        <mat-option value="reposicion">Reposición</mat-option>
+        <mat-option value="anulacion">Anulación</mat-option>
+      </mat-select>
       <mat-error>El campo es requerido</mat-error>
     </mat-form-field>
 
-        <mat-form-field class="w-full">
-      <mat-label>Oblea Anterior</mat-label>
-      <input formControlName="obleaOld" matInput />
+    <mat-form-field class="w-full">
+      <mat-label>Selecione Fecha</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date" />
+      <mat-error>El campo es requerido</mat-error>
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <!-- Campo 'QR' opcional en caso de 'Anulación' -->
+    <mat-form-field class="w-full">
+      <mat-label>Código QR</mat-label>
+      <input formControlName="qr" matInput [required]="isReposicion" />
       <mat-error>El campo es requerido</mat-error>
     </mat-form-field>
-  </div>
 
-  <!-- Campo 'QR' opcional en caso de 'Anulación' -->
-  <mat-form-field class="w-full">
-    <mat-label>Código QR</mat-label>
-    <input formControlName="qr" matInput [required]="isReposicion" />
-    <mat-error>El campo es requerido</mat-error>
-  </mat-form-field>
+    <mat-form-field class="w-full">
+      <mat-label>Formulario Nuevo</mat-label>
+      <input formControlName="numberFormNew" matInput />
+      <mat-error>El campo es requerido</mat-error>
+    </mat-form-field>
 
-  <!-- <mat-form-field class="w-full">
-    <mat-label>Dominio</mat-label>
-    <input formControlName="dominio" matInput [disabled]="isAnulacion" />
-    <mat-error>El campo es requerido</mat-error>
-  </mat-form-field> -->
+    <!-- Campos específicos para 'Reposición' -->
+    <div *ngIf="isReposicion">
+      <mat-form-field class="w-full">
+        <mat-label>Oblea Anterior</mat-label>
+        <input formControlName="obleaOld" matInput />
+        <mat-error>El campo es requerido</mat-error>
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label>Formulario Anterior</mat-label>
+        <input formControlName="numberFormOld" matInput />
+        <mat-error>El campo es requerido</mat-error>
+      </mat-form-field>
+    </div>
 
-  <mat-form-field class="w-full">
-    <mat-label>Dominio</mat-label>
-    <input formControlName="dominio" matInput [disabled]="troquelForm.get('tipoOperacion')?.value === 'anulacion'" />
-    <mat-error>El campo es requerido</mat-error>
-  </mat-form-field>
+    <mat-form-field class="w-full">
+      <mat-label>Dominio</mat-label>
+      <input
+        formControlName="dominio"
+        matInput
+        [disabled]="troquelForm.get('tipoOperacion')?.value === 'anulacion'"
+      />
+      <mat-error>El campo es requerido</mat-error>
+    </mat-form-field>
 
+    <mat-form-field class="w-full">
+      <mat-label>Motivo</mat-label>
+      <input formControlName="reson" matInput />
+      <mat-error>El campo es requerido</mat-error>
+    </mat-form-field>
 
-  <mat-form-field class="w-full">
-    <mat-label>Motivo</mat-label>
-    <input formControlName="reson" matInput />
-    <mat-error>El campo es requerido</mat-error>
-  </mat-form-field>
-
-  <!-- <button type="submit" mat-button>Guardar</button> -->
-
-  <div>
-    <button mat-dialog-close mat-button>Cancelar</button>
-    <button type="submit" (click)="onSubmit()" mat-button >Guardar</button>
-   </div>
-</form>
-
-
-
+    <div>
+      <button mat-dialog-close mat-button>Cancelar</button>
+      <button type="submit" (click)="onSubmit()" mat-button>Guardar</button>
+    </div>
+  </form>
 </mat-dialog-content>
-
-

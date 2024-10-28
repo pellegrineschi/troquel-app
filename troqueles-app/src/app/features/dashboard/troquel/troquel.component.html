@@ -1,6 +1,6 @@
 <button mat-flat-button (click)="openDialog()"><mat-icon>add</mat-icon>Agregar troquel</button>
 
-
+<h2>Reposiciones</h2>
 
 <table mat-table [dataSource]="reposiciones" class="mat-elevation-z8">
 
@@ -65,7 +65,7 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
-<h2>Tabla de Anulaciones</h2>
+<h2>Anulaciones</h2>
 <table mat-table [dataSource]="anulaciones" class="mat-elevation-z8">
   <!-- Definición de columnas para la tabla de anulaciones -->
 
