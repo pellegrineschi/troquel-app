@@ -1,8 +1,8 @@
 <button mat-flat-button (click)="openDialog()"><mat-icon>add</mat-icon>Agregar troquel</button>
 
-<h2>Reposiciones</h2>
+<!-- <h2>Reposiciones</h2> -->
 
-<table mat-table [dataSource]="reposiciones" class="mat-elevation-z8">
+<!-- <table mat-table [dataSource]="reposiciones" class="mat-elevation-z8">
 
 
   <ng-container matColumnDef="date">
@@ -63,58 +63,89 @@
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+</table> -->
 
-<h2>Anulaciones</h2>
-<table mat-table [dataSource]="anulaciones" class="mat-elevation-z8">
-  <!-- Definición de columnas para la tabla de anulaciones -->
-
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef> ID </th>
-    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-  </ng-container>
-
-
+<!-- Tabla de Obleas Canceladas -->
+<h2>Obleas Canceladas</h2>
+<table mat-table [dataSource]="obleasCanceladas" class="mat-elevation-z8">
+  <!-- Fecha -->
   <ng-container matColumnDef="date">
     <th mat-header-cell *matHeaderCellDef> Fecha </th>
-    <td mat-cell *matCellDef="let element"> {{element.date | date: "dd/MM/yyyy" }} </td>
+    <td mat-cell *matCellDef="let element"> {{ element.date | date: 'dd/MM/YYYY' }} </td>
   </ng-container>
 
+  <!-- Oblea Anterior -->
+  <ng-container matColumnDef="obleaOld">
+    <th mat-header-cell *matHeaderCellDef> Oblea Anterior </th>
+    <td mat-cell *matCellDef="let element"> {{ element.obleaOld }} </td>
+  </ng-container>
+
+  <!-- Oblea Nueva -->
+  <ng-container matColumnDef="obleaNew">
+    <th mat-header-cell *matHeaderCellDef> Oblea Nueva </th>
+    <td mat-cell *matCellDef="let element"> {{ element.obleaNew }} </td>
+  </ng-container>
+
+  <!-- Formulario Anterior -->
+  <ng-container matColumnDef="numberFormOld">
+    <th mat-header-cell *matHeaderCellDef> Formulario Anterior </th>
+    <td mat-cell *matCellDef="let element"> {{ element.numberFormOld }} </td>
+  </ng-container>
+
+  <!-- Formulario Nuevo -->
   <ng-container matColumnDef="numberFormNew">
-    <th mat-header-cell *matHeaderCellDef> Formulario Actual </th>
-    <td mat-cell *matCellDef="let element"> {{element.numberFormNew}} </td>
+    <th mat-header-cell *matHeaderCellDef> Formulario Nuevo </th>
+    <td mat-cell *matCellDef="let element"> {{ element.numberFormNew }} </td>
   </ng-container>
 
-  <ng-container matColumnDef="reson">
-    <th mat-header-cell *matHeaderCellDef> Motivo </th>
-    <td mat-cell *matCellDef="let element"> {{element.reson}} </td>
-  </ng-container>
-
+  <!-- Dominio -->
   <ng-container matColumnDef="dominio">
     <th mat-header-cell *matHeaderCellDef> Dominio </th>
-    <td mat-cell *matCellDef="let element"> {{element.dominio}} </td>
+    <td mat-cell *matCellDef="let element"> {{ element.dominio }} </td>
   </ng-container>
 
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef> Acciones </th>
-    <td mat-cell *matCellDef="let element">
-
-      <button (click)="editTroquel(element, 'anulacion')" mat-icon-button>
-        <mat-icon>edit</mat-icon>
-      </button>
-
-      <button (click)="deleteTroquelById(element.id, 'anulacion')" mat-icon-button>
-        <mat-icon>delete</mat-icon>
-      </button>
-    </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayColumnsAnulaciones"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayColumnsAnulaciones "></tr>
+  <!-- Header y Rows -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumnsObleasCanceladas"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumnsObleasCanceladas;"></tr>
 </table>
 
+<!-- Tabla de Formularios Anulados -->
+<h2>Formularios Anulados</h2>
+<table mat-table [dataSource]="formulariosAnulados" class="mat-elevation-z8">
+  <!-- Fecha -->
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef> Fecha </th>
+    <td mat-cell *matCellDef="let element"> {{ element.date | date: 'dd/MM/YYYY' }} </td>
+  </ng-container>
+
+  <!-- Formulario Anterior -->
+  <ng-container matColumnDef="numberFormOld">
+    <th mat-header-cell *matHeaderCellDef> Formulario Anterior </th>
+    <td mat-cell *matCellDef="let element"> {{ element.numberFormOld }} </td>
+  </ng-container>
+
+  <!-- Motivo -->
+  <ng-container matColumnDef="reson">
+    <th mat-header-cell *matHeaderCellDef> Motivo </th>
+    <td mat-cell *matCellDef="let element"> {{ element.reson }} </td>
+  </ng-container>
+
+  <!-- Dominio -->
+  <ng-container matColumnDef="dominio">
+    <th mat-header-cell *matHeaderCellDef> Dominio </th>
+    <td mat-cell *matCellDef="let element"> {{ element.dominio }} </td>
+  </ng-container>
+
+  <!-- Header y Rows -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumnsFormulariosAnulados"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumnsFormulariosAnulados;"></tr>
+</table>
+
+
+
+
 <!-- Nueva tabla de Anulaciones -->
-<h2>Tabla de Anulaciones</h2>
+<h2>Anulaciones de troqueles</h2>
 <app-troquel-anulacion
 [anulaciones]="anulaciones"
 (edit)="editAnulacion($event)"

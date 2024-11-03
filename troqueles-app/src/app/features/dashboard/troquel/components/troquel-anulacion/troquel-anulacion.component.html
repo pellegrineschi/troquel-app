@@ -40,7 +40,7 @@
     </td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="['id','date', 'numberFormNew', 'reson', 'dominio', 'actions' ]"></tr>
-  <tr mat-row *matRowDef="let row; columns: ['id','date', 'numberFormNew', 'reson', 'dominio', 'actions']"></tr>
+  <tr mat-header-row *matHeaderRowDef="displayColumnsAnulaciones"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayColumnsAnulaciones"></tr>
 </table>
 

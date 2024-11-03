@@ -11,6 +11,16 @@ export class TroquelAnulacionComponent {
   @Output() edit = new EventEmitter<Partial<Troquel>>();
   @Output() delete = new EventEmitter<string>();
 
+
+  displayColumnsAnulaciones: string[] = [
+    'id',
+    'date',
+    'numberFormNew',
+     'reson',
+     'dominio',
+     'actions'
+  ]
+
   // Método para editar una anulación
   editAnulacion(anulacion: Partial<Troquel>) {
     this.edit.emit(anulacion);

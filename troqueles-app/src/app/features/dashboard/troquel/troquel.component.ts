@@ -58,15 +58,25 @@ export class TroquelComponent {
     'reson',
     'actions'];
 
-    displayColumnsAnulaciones: string[] = [
-      'id',
-      'date',
-      'numberFormNew',
-       'reson',
-       'dominio',
-       'actions'
-    ]
-    // dataSource: Troquel[] = [];
+    displayedColumnsObleasCanceladas: string[] = ['date', 'obleaOld', 'obleaNew', 'numberFormOld', 'numberFormNew', 'dominio'];
+    displayedColumnsFormulariosAnulados: string[] = ['date', 'numberFormOld', 'reson', 'dominio'];
+
+    obleasCanceladas: Troquel[] = [];    // Datos para la tabla "Obleas Canceladas"
+    formulariosAnulados: Troquel[] = []; // Datos para la tabla "Formularios Anulados"
+
+    // reposiciones: Troquel[] = []; // Arreglo de reposiciones original
+
+    ngOnInit() {
+      this.dividirReposiciones();
+    }
+
+    dividirReposiciones(): void {
+      // Aquí simplemente asignamos los datos de reposiciones a ambos arreglos.
+      this.obleasCanceladas = this.reposiciones;
+      this.formulariosAnulados = this.reposiciones;
+    }
+
+
   nameWeek = "";
 
   constructor(private matdialog: MatDialog){}
