@@ -113,3 +113,10 @@
   <tr mat-row *matRowDef="let row; columns: displayColumnsAnulaciones "></tr>
 </table>
 
+<!-- Nueva tabla de Anulaciones -->
+<h2>Tabla de Anulaciones</h2>
+<app-troquel-anulacion
+[anulaciones]="anulaciones"
+(edit)="editAnulacion($event)"
+  (delete)="deleteAnulacion($event)"
+></app-troquel-anulacion>

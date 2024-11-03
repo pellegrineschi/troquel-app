@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { TroquelAnulacionComponent } from './components/troquel-anulacion/troquel-anulacion.component';
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -31,7 +32,8 @@ export const MY_DATE_FORMATS = {
 @NgModule({
   declarations: [
     TroquelComponent,
-    TroquelDialogComponent
+    TroquelDialogComponent,
+    TroquelAnulacionComponent
   ],
   exports: [
     TroquelComponent

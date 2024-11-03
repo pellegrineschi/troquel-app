@@ -115,25 +115,7 @@ export class TroquelComponent {
 
 
 
-  // editTroquel(EditTroquel: Troquel, tipo: 'reposicion' | 'anulacion'): void {
-  //   const troquelData = { ...EditTroquel, tipoOperacion: tipo };
 
-  //   this.matdialog.open(TroquelDialogComponent, { data: troquelData }).afterClosed().subscribe({
-  //     next: (value) => {
-  //       if (!!value) {
-  //         if (tipo === 'reposicion') {
-  //           this.reposiciones = this.reposiciones.map((el) =>
-  //             el.id === EditTroquel.id ? { ...value, id: EditTroquel.id, tipoOperacion: 'reposicion' } : el
-  //           );
-  //         } else if (tipo === 'anulacion') {
-  //           this.anulaciones = this.anulaciones.map((el) =>
-  //             el.id === EditTroquel.id ? { ...value, id: EditTroquel.id, tipoOperacion: 'anulacion' } : el
-  //           );
-  //         }
-  //       }
-  //     },
-  //   });
-  // }
 
   editTroquel(EditTroquel: Troquel, tipo: 'reposicion' | 'anulacion'): void {
     const troquelData = { ...EditTroquel, tipoOperacion: tipo };  // Agregar tipoOperacion a los datos
@@ -160,6 +142,27 @@ export class TroquelComponent {
       },
     });
   }
+
+  deleteAnulacion(id: string) {
+    // Lógica para eliminar la anulación del array
+    this.anulaciones = this.anulaciones.filter(a => a.id !== id);
+  }
+
+  editAnulacion(EditAnulacion: Partial<Troquel>): void {
+    const anulacionData = { ...EditAnulacion, tipoOperacion: 'anulacion' }; // Añadir tipoOperacion como 'anulacion'
+
+    this.matdialog.open(TroquelDialogComponent, { data: anulacionData }).afterClosed().subscribe({
+      next: (value) => {
+        if (value) {
+          // Actualizar la lista de anulaciones
+          this.anulaciones = this.anulaciones.map((el) =>
+            el.id === EditAnulacion.id ? { ...value, id: EditAnulacion.id, tipoOperacion: 'anulacion' } : el
+          );
+        }
+      },
+    });
+}
+
 
 
 

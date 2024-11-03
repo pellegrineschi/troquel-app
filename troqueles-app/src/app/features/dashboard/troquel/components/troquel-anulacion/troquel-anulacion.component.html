@@ -1,0 +1,46 @@
+<table mat-table [dataSource]="anulaciones" class="mat-elevation-z8">
+  <!-- Columnas de la tabla de Anulaciones -->
+
+   <!-- Columna ID -->
+   <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef> Fecha </th>
+    <td mat-cell *matCellDef="let element"> {{ element.date | date: "dd/MM/yyyy" }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="numberFormNew">
+    <th mat-header-cell *matHeaderCellDef> Formulario Actual </th>
+    <td mat-cell *matCellDef="let element"> {{ element.numberFormNew }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="reson">
+    <th mat-header-cell *matHeaderCellDef> Motivo </th>
+    <td mat-cell *matCellDef="let element"> {{ element.reson }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="dominio">
+    <th mat-header-cell *matHeaderCellDef> Dominio </th>
+    <td mat-cell *matCellDef="let element"> {{ element.dominio }} </td>
+  </ng-container>
+
+  <!-- Columna Acciones -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button (click)="editAnulacion(element)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button (click)="deleteAnulacion(element.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['id','date', 'numberFormNew', 'reson', 'dominio', 'actions' ]"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['id','date', 'numberFormNew', 'reson', 'dominio', 'actions']"></tr>
+</table>
+

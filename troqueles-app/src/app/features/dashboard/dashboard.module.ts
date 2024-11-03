@@ -13,9 +13,11 @@ import { MatListModule } from '@angular/material/list';
 import { TroquelModule } from './troquel/troquel.module';
 
 
+
 @NgModule({
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+
   ],
   imports: [
     CommonModule,
