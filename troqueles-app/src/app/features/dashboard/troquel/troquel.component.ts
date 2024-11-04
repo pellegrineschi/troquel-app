@@ -68,7 +68,15 @@ export class TroquelComponent {
 
     ngOnInit() {
       this.dividirReposiciones();
+      this.anulaciones = this.reposiciones.map(troquel=>({
+        date:troquel.date,
+        numberFormOld: troquel.numberFormOld,
+        reson: troquel.reson,
+        dominio: troquel.dominio,
+      }))
     }
+
+
 
     dividirReposiciones(): void {
       // Aquí simplemente asignamos los datos de reposiciones a ambos arreglos.

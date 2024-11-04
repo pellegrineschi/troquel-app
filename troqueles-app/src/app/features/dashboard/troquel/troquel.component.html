@@ -110,38 +110,11 @@
 </table>
 
 <!-- Tabla de Formularios Anulados -->
-<h2>Formularios Anulados</h2>
-<table mat-table [dataSource]="formulariosAnulados" class="mat-elevation-z8">
-  <!-- Fecha -->
-  <ng-container matColumnDef="date">
-    <th mat-header-cell *matHeaderCellDef> Fecha </th>
-    <td mat-cell *matCellDef="let element"> {{ element.date | date: 'dd/MM/YYYY' }} </td>
-  </ng-container>
-
-  <!-- Formulario Anterior -->
-  <ng-container matColumnDef="numberFormOld">
-    <th mat-header-cell *matHeaderCellDef> Formulario Anterior </th>
-    <td mat-cell *matCellDef="let element"> {{ element.numberFormOld }} </td>
-  </ng-container>
-
-  <!-- Motivo -->
-  <ng-container matColumnDef="reson">
-    <th mat-header-cell *matHeaderCellDef> Motivo </th>
-    <td mat-cell *matCellDef="let element"> {{ element.reson }} </td>
-  </ng-container>
-
-  <!-- Dominio -->
-  <ng-container matColumnDef="dominio">
-    <th mat-header-cell *matHeaderCellDef> Dominio </th>
-    <td mat-cell *matCellDef="let element"> {{ element.dominio }} </td>
-  </ng-container>
-
-  <!-- Header y Rows -->
-  <tr mat-header-row *matHeaderRowDef="displayedColumnsFormulariosAnulados"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumnsFormulariosAnulados;"></tr>
-</table>
 
 
+<app-troquel-formularios-anulados
+ [formulariosAnulados]="formulariosAnulados"
+ ></app-troquel-formularios-anulados>
 
 
 <!-- Nueva tabla de Anulaciones -->
@@ -151,3 +124,5 @@
 (edit)="editAnulacion($event)"
   (delete)="deleteAnulacion($event)"
 ></app-troquel-anulacion>
+
+

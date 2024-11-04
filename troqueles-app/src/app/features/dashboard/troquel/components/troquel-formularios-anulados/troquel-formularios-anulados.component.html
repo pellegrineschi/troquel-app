@@ -1,0 +1,27 @@
+<h3>Formularios Anulados</h3>
+
+<table mat-table [dataSource]="formulariosAnulados" class="mat-elevation-z8">
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef>Fecha</th>
+    <td mat-cell *matCellDef="let element">{{ element.date | date: 'dd/MM/YYYY' }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="numberFormOld">
+    <th mat-header-cell *matHeaderCellDef>Formulario Anterior</th>
+    <td mat-cell *matCellDef="let element">{{ element.numberFormOld }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="reson">
+    <th mat-header-cell *matHeaderCellDef>Motivo</th>
+    <td mat-cell *matCellDef="let element">{{ element.reson }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="dominio">
+    <th mat-header-cell *matHeaderCellDef>Dominio</th>
+    <td mat-cell *matCellDef="let element">{{ element.dominio }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['date', 'numberFormOld', 'reson', 'dominio']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['date', 'numberFormOld', 'reson', 'dominio']"></tr>
+</table>
+
