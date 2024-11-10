@@ -11,3 +11,11 @@ export interface Troquel {
   qr?: string;
 
 }
+
+export interface FormularioAnulado {
+  date: Date;
+  numberFormOld: number;
+  reson: string;
+  dominio: string;
+}
+

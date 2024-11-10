@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Troquel } from './model/index.model';
+import { FormularioAnulado, Troquel } from './model/index.model';
 import { MatDialog } from '@angular/material/dialog';
 import { generatedId } from '../../../shared/utils';
 
@@ -45,6 +45,8 @@ export class TroquelComponent {
     },
   ];
   anulaciones: Partial<Troquel>[] = [];
+  formulariosAnulados: FormularioAnulado[] = [];
+
 
 
   displayedColumns: string[] =
@@ -62,7 +64,7 @@ export class TroquelComponent {
     displayedColumnsFormulariosAnulados: string[] = ['date', 'numberFormOld', 'reson', 'dominio'];
 
     obleasCanceladas: Troquel[] = [];    // Datos para la tabla "Obleas Canceladas"
-    formulariosAnulados: Troquel[] = []; // Datos para la tabla "Formularios Anulados"
+    // formulariosAnulados: Troquel[] = []; // Datos para la tabla "Formularios Anulados"
 
     // reposiciones: Troquel[] = []; // Arreglo de reposiciones original
 
@@ -91,6 +93,32 @@ export class TroquelComponent {
 
 
 
+  // openDialog(): void {
+  //   this.matdialog.open(TroquelDialogComponent).afterClosed()
+  //     .subscribe({
+  //       next: (value) => {
+  //         if (value) {
+  //           value["id"] = generatedId(4);
+
+  //           if (value.tipoOperacion === 'reposicion') {
+  //             // Agregar el troquel completo a reposiciones
+  //             this.reposiciones = [...this.reposiciones, value];
+  //           } else if (value.tipoOperacion === 'anulacion') {
+  //             // Solo los campos necesarios para anulaciones
+  //             const anulacionData = {
+  //               date: value.date,
+  //               numberFormNew: value.numberFormNew,
+  //               reson: value.reson,
+  //               dominio: value.dominio,
+  //               id: value.id
+  //             };
+  //             this.anulaciones = [...this.anulaciones, anulacionData];
+  //           }
+  //         }
+  //       }
+  //     });
+  // }
+
   openDialog(): void {
     this.matdialog.open(TroquelDialogComponent).afterClosed()
       .subscribe({
@@ -101,21 +129,20 @@ export class TroquelComponent {
             if (value.tipoOperacion === 'reposicion') {
               // Agregar el troquel completo a reposiciones
               this.reposiciones = [...this.reposiciones, value];
-            } else if (value.tipoOperacion === 'anulacion') {
-              // Solo los campos necesarios para anulaciones
-              const anulacionData = {
-                date: value.date,
-                numberFormNew: value.numberFormNew,
-                reson: value.reson,
-                dominio: value.dominio,
-                id: value.id
-              };
-              this.anulaciones = [...this.anulaciones, anulacionData];
+
+              // Actualizar formulariosAnulados con nueva referencia
+              this.formulariosAnulados = this.reposiciones.map(troquel => ({
+                date: troquel.date,
+                numberFormOld: troquel.numberFormOld,
+                reson: troquel.reson,
+                dominio: troquel.dominio
+              }));
             }
           }
         }
       });
   }
+
 
 
 
