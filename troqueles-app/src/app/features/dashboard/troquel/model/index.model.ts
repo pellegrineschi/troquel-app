@@ -15,7 +15,7 @@ export interface Troquel {
 export interface FormularioAnulado {
   id: string;
   date: Date;
-  numberFormOld: number;
+  numberFormNew: number;
   reson: string;
   dominio: string;
 }
