@@ -13,6 +13,7 @@ export interface Troquel {
 }
 
 export interface FormularioAnulado {
+  id: string;
   date: Date;
   numberFormOld: number;
   reson: string;

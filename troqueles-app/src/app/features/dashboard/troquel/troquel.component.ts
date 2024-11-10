@@ -93,31 +93,7 @@ export class TroquelComponent {
 
 
 
-  // openDialog(): void {
-  //   this.matdialog.open(TroquelDialogComponent).afterClosed()
-  //     .subscribe({
-  //       next: (value) => {
-  //         if (value) {
-  //           value["id"] = generatedId(4);
 
-  //           if (value.tipoOperacion === 'reposicion') {
-  //             // Agregar el troquel completo a reposiciones
-  //             this.reposiciones = [...this.reposiciones, value];
-  //           } else if (value.tipoOperacion === 'anulacion') {
-  //             // Solo los campos necesarios para anulaciones
-  //             const anulacionData = {
-  //               date: value.date,
-  //               numberFormNew: value.numberFormNew,
-  //               reson: value.reson,
-  //               dominio: value.dominio,
-  //               id: value.id
-  //             };
-  //             this.anulaciones = [...this.anulaciones, anulacionData];
-  //           }
-  //         }
-  //       }
-  //     });
-  // }
 
   openDialog(): void {
     this.matdialog.open(TroquelDialogComponent).afterClosed()
@@ -132,6 +108,7 @@ export class TroquelComponent {
 
               // Actualizar formulariosAnulados con nueva referencia
               this.formulariosAnulados = this.reposiciones.map(troquel => ({
+                id: troquel.id,
                 date: troquel.date,
                 numberFormOld: troquel.numberFormOld,
                 reson: troquel.reson,
@@ -147,15 +124,33 @@ export class TroquelComponent {
 
 
 
+  // deleteTroquelById(id: string, tipo: 'reposicion' | 'anulacion'): void {
+  //   if (confirm("¿Está seguro?")) {
+  //     if (tipo === 'reposicion') {
+  //       this.reposiciones = this.reposiciones.filter(troquel => troquel.id !== id);
+  //     } else if (tipo === 'anulacion') {
+  //       this.anulaciones = this.anulaciones.filter(troquel => troquel.id !== id);
+  //     }
+  //   }
+  // }
+
   deleteTroquelById(id: string, tipo: 'reposicion' | 'anulacion'): void {
-    if (confirm("¿Está seguro?")) {
+    if (confirm("¿Está seguro de que quiere eliminar este troquel?")) {
       if (tipo === 'reposicion') {
+        // Eliminar el troquel de `reposiciones`
         this.reposiciones = this.reposiciones.filter(troquel => troquel.id !== id);
+
+        // Actualizar `obleasCanceladas` y `formulariosAnulados` para reflejar el cambio
+        this.obleasCanceladas = this.obleasCanceladas.filter(troquel => troquel.id !== id);
+        this.formulariosAnulados = this.formulariosAnulados.filter(troquel => troquel.id !== id);
+
       } else if (tipo === 'anulacion') {
+        // Si es una anulación, solo eliminar de `anulaciones`
         this.anulaciones = this.anulaciones.filter(troquel => troquel.id !== id);
       }
     }
   }
+
 
 
 
