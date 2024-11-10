@@ -314,29 +314,9 @@ export class TroquelComponent {
 
   constructor(private matdialog: MatDialog) {}
 
-  // openDialog(): void {
-  //   this.matdialog.open(TroquelDialogComponent).afterClosed()
-  //     .subscribe({
-  //       next: (value) => {
-  //         if (value) {
-  //           value["id"] = generatedId(4);
 
-  //           if (value.tipoOperacion === 'reposicion') {
-  //             this.reposiciones = [...this.reposiciones, value];
-  //           } else if (value.tipoOperacion === 'anulacion') {
-  //             // Agregar el troquel a anulaciones
-  //             this.formulariosAnulados = [...this.formulariosAnulados, {
-  //               id: value.id,
-  //               date: value.date,
-  //               numberFormNew: value.numberFormNew,
-  //               reson: value.reson,
-  //               dominio: value.dominio
-  //             }];
-  //           }
-  //         }
-  //       }
-  //     });
-  // }
+
+
 
   openDialog(): void {
     this.matdialog.open(TroquelDialogComponent).afterClosed()
@@ -346,23 +326,15 @@ export class TroquelComponent {
             value["id"] = generatedId(4);
 
             if (value.tipoOperacion === 'reposicion') {
-              // Agregar el troquel completo a reposiciones
               this.reposiciones = [...this.reposiciones, value];
-
-              // Actualizar formulariosAnulados con nueva referencia, incluyendo numberFormOld y numberFormNew
-              this.formulariosAnulados = this.reposiciones.map(troquel => ({
-                id: troquel.id,
-                date: troquel.date,
-                numberFormOld: troquel.numberFormOld,  // Asegurarse de incluir esta propiedad
-                numberFormNew: troquel.numberFormNew,
-                reson: troquel.reson,
-                dominio: troquel.dominio
-              }));
+            } else if (value.tipoOperacion === 'anulacion') {
+              this.anulaciones = [...this.anulaciones, value]; // Agregar anulación
             }
           }
         }
       });
   }
+
 
 
   deleteTroquelById(id: string, tipo: 'reposicion' | 'anulacion'): void {
