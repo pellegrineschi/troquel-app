@@ -61,18 +61,16 @@ export class TroquelComponent {
     'actions'];
 
     displayedColumnsObleasCanceladas: string[] = ['date', 'obleaOld', 'obleaNew', 'numberFormOld', 'numberFormNew', 'dominio'];
-    displayedColumnsFormulariosAnulados: string[] = ['date', 'numberFormOld', 'reson', 'dominio'];
+    displayedColumnsFormulariosAnulados: string[] = ['date', 'numberFormNew', 'reson', 'dominio'];
 
-    obleasCanceladas: Troquel[] = [];    // Datos para la tabla "Obleas Canceladas"
-    // formulariosAnulados: Troquel[] = []; // Datos para la tabla "Formularios Anulados"
+    obleasCanceladas: Troquel[] = [];
 
-    // reposiciones: Troquel[] = []; // Arreglo de reposiciones original
 
     ngOnInit() {
       this.dividirReposiciones();
       this.anulaciones = this.reposiciones.map(troquel=>({
         date:troquel.date,
-        numberFormOld: troquel.numberFormOld,
+        numberFormNew: troquel.numberFormNew,
         reson: troquel.reson,
         dominio: troquel.dominio,
       }))
@@ -87,7 +85,7 @@ export class TroquelComponent {
     }
 
 
-  nameWeek = "";
+
 
   constructor(private matdialog: MatDialog){}
 
@@ -149,31 +147,7 @@ export class TroquelComponent {
 
 
 
-  // editTroquel(EditTroquel: Troquel, tipo: 'reposicion' | 'anulacion'): void {
-  //   const troquelData = { ...EditTroquel, tipoOperacion: tipo };  // Agregar tipoOperacion a los datos
 
-  //   this.matdialog.open(TroquelDialogComponent, { data: troquelData }).afterClosed().subscribe({
-  //     next: (value) => {
-  //       if (!!value) {
-  //         if (tipo === 'reposicion') {
-  //           // Actualiza la lista de reposiciones
-  //           this.reposiciones = this.reposiciones.map((el) =>
-  //             el.id === EditTroquel.id ? { ...value, id: EditTroquel.id, tipoOperacion: 'reposicion' } : el
-  //           );
-  //         } else if (tipo === 'anulacion') {
-  //           // Actualiza la lista de anulaciones
-  //           this.anulaciones = this.anulaciones.map((el) =>
-  //             el.id === EditTroquel.id ? {
-  //               ...value,
-  //               id: EditTroquel.id,
-  //               tipoOperacion: 'anulacion'
-  //             } : el
-  //           );
-  //         }
-  //       }
-  //     },
-  //   });
-  // }
 
   editTroquel(EditTroquel: Troquel, tipo: 'reposicion' | 'anulacion'): void {
     const troquelData = { ...EditTroquel, tipoOperacion: tipo };
