@@ -124,15 +124,7 @@ export class TroquelComponent {
 
 
 
-  // deleteTroquelById(id: string, tipo: 'reposicion' | 'anulacion'): void {
-  //   if (confirm("¿Está seguro?")) {
-  //     if (tipo === 'reposicion') {
-  //       this.reposiciones = this.reposiciones.filter(troquel => troquel.id !== id);
-  //     } else if (tipo === 'anulacion') {
-  //       this.anulaciones = this.anulaciones.filter(troquel => troquel.id !== id);
-  //     }
-  //   }
-  // }
+
 
   deleteTroquelById(id: string, tipo: 'reposicion' | 'anulacion'): void {
     if (confirm("¿Está seguro de que quiere eliminar este troquel?")) {
@@ -157,31 +149,64 @@ export class TroquelComponent {
 
 
 
+  // editTroquel(EditTroquel: Troquel, tipo: 'reposicion' | 'anulacion'): void {
+  //   const troquelData = { ...EditTroquel, tipoOperacion: tipo };  // Agregar tipoOperacion a los datos
+
+  //   this.matdialog.open(TroquelDialogComponent, { data: troquelData }).afterClosed().subscribe({
+  //     next: (value) => {
+  //       if (!!value) {
+  //         if (tipo === 'reposicion') {
+  //           // Actualiza la lista de reposiciones
+  //           this.reposiciones = this.reposiciones.map((el) =>
+  //             el.id === EditTroquel.id ? { ...value, id: EditTroquel.id, tipoOperacion: 'reposicion' } : el
+  //           );
+  //         } else if (tipo === 'anulacion') {
+  //           // Actualiza la lista de anulaciones
+  //           this.anulaciones = this.anulaciones.map((el) =>
+  //             el.id === EditTroquel.id ? {
+  //               ...value,
+  //               id: EditTroquel.id,
+  //               tipoOperacion: 'anulacion'
+  //             } : el
+  //           );
+  //         }
+  //       }
+  //     },
+  //   });
+  // }
+
   editTroquel(EditTroquel: Troquel, tipo: 'reposicion' | 'anulacion'): void {
-    const troquelData = { ...EditTroquel, tipoOperacion: tipo };  // Agregar tipoOperacion a los datos
+    const troquelData = { ...EditTroquel, tipoOperacion: tipo };
 
     this.matdialog.open(TroquelDialogComponent, { data: troquelData }).afterClosed().subscribe({
       next: (value) => {
         if (!!value) {
           if (tipo === 'reposicion') {
-            // Actualiza la lista de reposiciones
+            // Actualiza la lista de `reposiciones`
             this.reposiciones = this.reposiciones.map((el) =>
               el.id === EditTroquel.id ? { ...value, id: EditTroquel.id, tipoOperacion: 'reposicion' } : el
             );
+
+            // Sincronizar `obleasCanceladas` y `formulariosAnulados`
+            this.obleasCanceladas = this.obleasCanceladas.map((el) =>
+              el.id === EditTroquel.id ? { ...value, id: EditTroquel.id } : el
+            );
+
+            this.formulariosAnulados = this.formulariosAnulados.map((el) =>
+              el.id === EditTroquel.id ? { ...value, id: EditTroquel.id } : el
+            );
+
           } else if (tipo === 'anulacion') {
-            // Actualiza la lista de anulaciones
+            // Actualiza la lista de `anulaciones`
             this.anulaciones = this.anulaciones.map((el) =>
-              el.id === EditTroquel.id ? {
-                ...value,
-                id: EditTroquel.id,
-                tipoOperacion: 'anulacion'
-              } : el
+              el.id === EditTroquel.id ? { ...value, id: EditTroquel.id, tipoOperacion: 'anulacion' } : el
             );
           }
         }
       },
     });
   }
+
 
   deleteAnulacion(id: string) {
     // Lógica para eliminar la anulación del array
