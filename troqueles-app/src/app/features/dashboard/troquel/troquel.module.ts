@@ -17,6 +17,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { TroquelAnulacionComponent } from './components/troquel-anulacion/troquel-anulacion.component';
 import { TroquelFormulariosAnuladosComponent } from './components/troquel-formularios-anulados/troquel-formularios-anulados.component';
 
+
+
 export const MY_DATE_FORMATS = {
   parse: {
     dateInput: 'DD/MM/YYYY',
@@ -35,7 +37,8 @@ export const MY_DATE_FORMATS = {
     TroquelComponent,
     TroquelDialogComponent,
     TroquelAnulacionComponent,
-    TroquelFormulariosAnuladosComponent
+    TroquelFormulariosAnuladosComponent,
+
   ],
   exports: [
     TroquelComponent
