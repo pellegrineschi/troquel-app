@@ -191,8 +191,9 @@
 
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Troquel } from './model/index.model';
 import { TroquelService } from './service/troquel.service';
+import { FormularioAnulado, Troquel } from './model/index.model';
+import { generatedId } from '../../../shared/utils';
 import { TroquelDialogComponent } from './components/troquel-dialog/troquel-dialog.component';
 
 @Component({
@@ -201,29 +202,76 @@ import { TroquelDialogComponent } from './components/troquel-dialog/troquel-dial
   styleUrls: ['./troquel.component.scss']
 })
 export class TroquelComponent implements OnInit {
+
+  displayedColumns: string[] = [
+    'date',
+    'id',
+    'dominio',
+    'numberFormOld',
+    'numberFormNew',
+    'obleaOld',
+    'obleaNew',
+    'reson',
+    'actions'
+  ];
+
+
   reposiciones: Troquel[] = [];
+  anulaciones: FormularioAnulado[] = [];
 
-  displayedColumns: string[] = ['id', 'dominio', 'obleaOld', 'obleaNew', 'date', 'reson', 'actions'];
-
-  constructor(private dialog: MatDialog, private troquelService: TroquelService) {}
+  constructor(private matdialog: MatDialog, private troquelService: TroquelService) {}
 
   ngOnInit(): void {
+    // Suscríbete a los cambios en las reposiciones desde el servicio
     this.troquelService.reposiciones$.subscribe(reposiciones => {
       this.reposiciones = reposiciones;
+    });
+
+    this.troquelService.anulaciones$.subscribe(anulaciones => {
+      this.anulaciones = anulaciones;
     });
   }
 
   openDialog(): void {
-    this.dialog.open(TroquelDialogComponent).afterClosed().subscribe(value => {
-      if (value && value.tipoOperacion === 'reposicion') {
-        this.troquelService.addReposicion(value);
+    this.matdialog.open(TroquelDialogComponent).afterClosed().subscribe(value => {
+      if (value) {
+        value.id = generatedId(4);
+        this.troquelService.addReposicion(value); // Agrega la reposición al servicio
       }
     });
   }
 
-  deleteTroquel(id: string): void {
-    if (confirm("¿Está seguro de que quiere eliminar este troquel?")) {
-      this.troquelService.deleteReposicionById(id);
+  deleteTroquelById(id: string): void {
+    if (confirm('¿Está seguro de que quiere eliminar este troquel?')) {
+      this.troquelService.deleteReposicionById(id); // Elimina la reposición del servicio
     }
   }
+
+  editTroquel(troquel: Troquel): void {
+    this.matdialog.open(TroquelDialogComponent, { data: troquel }).afterClosed().subscribe(value => {
+      if (value) {
+        const updatedTroquel = { ...troquel, ...value };
+        this.troquelService.editReposicion(updatedTroquel); // Edita la reposición en el servicio
+      }
+    });
+  }
+
+  editAnulacion(anulacion: any): void {
+    this.troquelService.editAnulacion(anulacion); // Llama al servicio
+  }
+
+  deleteAnulacion(anulacionId: number): void {
+    if (confirm('¿Estás seguro de que deseas eliminar esta anulación?')) {
+      this.troquelService.deleteAnulacion(anulacionId).subscribe({
+        next: () => {
+          console.log(`Anulación con ID ${anulacionId} eliminada exitosamente.`);
+        },
+        error: (err) => {
+          console.error('Error al eliminar la anulación:', err);
+        }
+      });
+    }
+  }
+
+
 }

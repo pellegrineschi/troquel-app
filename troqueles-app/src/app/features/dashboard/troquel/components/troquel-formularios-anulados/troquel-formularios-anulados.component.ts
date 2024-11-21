@@ -14,8 +14,10 @@
 
 
 import { Component, OnInit } from '@angular/core';
-import { Troquel } from '../../model/index.model';
 import { TroquelService } from '../../service/troquel.service';
+import { Troquel } from '../../model/index.model';
+
+
 
 @Component({
   selector: 'app-troquel-formularios-anulados',
@@ -24,13 +26,14 @@ import { TroquelService } from '../../service/troquel.service';
 })
 export class TroquelFormulariosAnuladosComponent implements OnInit {
   reposiciones: Troquel[] = [];
-  displayedColumns: string[] = ['date', 'numberFormOld', 'numberFormNew', 'dominio', 'reson'];
 
   constructor(private troquelService: TroquelService) {}
 
   ngOnInit(): void {
+    // Suscríbete a los cambios en las reposiciones desde el servicio
     this.troquelService.reposiciones$.subscribe(reposiciones => {
       this.reposiciones = reposiciones;
     });
   }
 }
+
