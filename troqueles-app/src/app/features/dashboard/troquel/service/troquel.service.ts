@@ -52,7 +52,7 @@ editAnulacion(anulacion: any): void {
   }
 }
 
-deleteAnulacion(anulacionId: number): Observable<void> {
+deleteAnulacion(anulacionId: string): Observable<void> {
   // Filtramos la lista de anulaciones para excluir la que queremos eliminar.
   const index = this.anulaciones.findIndex(anulacion => anulacion.id === anulacionId);
   if (index !== -1) {

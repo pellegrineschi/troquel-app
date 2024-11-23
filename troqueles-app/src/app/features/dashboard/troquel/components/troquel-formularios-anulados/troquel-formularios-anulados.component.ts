@@ -15,7 +15,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { TroquelService } from '../../service/troquel.service';
-import { Troquel } from '../../model/index.model';
+import { FormularioAnulado, Troquel } from '../../model/index.model';
 
 
 
@@ -26,6 +26,7 @@ import { Troquel } from '../../model/index.model';
 })
 export class TroquelFormulariosAnuladosComponent implements OnInit {
   reposiciones: Troquel[] = [];
+  formulariosAnulados: FormularioAnulado[] = [];
 
   constructor(private troquelService: TroquelService) {}
 
