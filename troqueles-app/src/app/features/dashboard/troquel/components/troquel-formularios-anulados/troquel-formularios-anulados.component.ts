@@ -1,19 +1,5 @@
-// import { Component, Input } from '@angular/core';
-// import { Troquel } from '../../model/index.model';
 
-// @Component({
-//   selector: 'app-troquel-formularios-anulados',
-//   templateUrl: './troquel-formularios-anulados.component.html',
-//   styleUrl: './troquel-formularios-anulados.component.scss'
-// })
-// export class TroquelFormulariosAnuladosComponent {
-
-//   @Input() formulariosAnulados: Partial<Troquel>[] = [];
-
-// }
-
-
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TroquelService } from '../../service/troquel.service';
 import { FormularioAnulado, Troquel } from '../../model/index.model';
 
@@ -25,8 +11,11 @@ import { FormularioAnulado, Troquel } from '../../model/index.model';
   styleUrls: ['./troquel-formularios-anulados.component.scss']
 })
 export class TroquelFormulariosAnuladosComponent implements OnInit {
+  @Input()
+   formulariosAnulados: FormularioAnulado[] = [];
+
   reposiciones: Troquel[] = [];
-  formulariosAnulados: FormularioAnulado[] = [];
+  // formulariosAnulados: FormularioAnulado[] = [];
 
   constructor(private troquelService: TroquelService) {}
 
