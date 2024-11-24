@@ -52,6 +52,22 @@ export class TroquelComponent implements OnInit {
     });
   }
 
+  // openDialog(): void {
+  //   this.matdialog.open(TroquelDialogComponent).afterClosed().subscribe(value => {
+  //     if (value) {
+  //       value.id = generatedId(4);
+
+  //       // Verifica si es una reposición o anulación
+  //       if (value.type === 'reposicion') {
+  //         this.troquelService.addReposicion(value);
+  //       } else if (value.type === 'anulacion') {
+  //         this.troquelService.addAnulacion(value);
+  //       }
+  //     }
+  //   });
+  // }
+
+
   deleteTroquelById(id: string): void {
     if (confirm('¿Está seguro de que quiere eliminar este troquel?')) {
       this.troquelService.deleteReposicionById(id); // Elimina la reposición del servicio

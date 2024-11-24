@@ -9,6 +9,7 @@ export interface Troquel {
   reson: string;
   tipoOperacion?: string;
   qr?: string;
+  // type: 'reposicion' | 'anulacion'; // Identifica el tipo
 
 }
 

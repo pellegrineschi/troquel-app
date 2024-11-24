@@ -76,9 +76,10 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
+
 <!-- Tabla de Formularios Anulados -->
 <app-troquel-formularios-anulados>
-  [formulariosAnulados]= "anulaciones"
+  [formulariosAnulados]= "reposiciones"
 </app-troquel-formularios-anulados>
 
 <!-- Tabla de Anulaciones -->
@@ -87,4 +88,3 @@
   (edit)="editAnulacion($event)"
   (delete)="deleteAnulacion($event)"
 ></app-troquel-anulacion>
-
